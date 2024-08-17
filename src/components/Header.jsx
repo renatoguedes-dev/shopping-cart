@@ -1,8 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
 
-const Header = () => {
+const Header = ({ cartItems }) => {
   const headerNavLinks = [
     { name: "Home", path: "/" },
     { name: "Products", path: "products" },
@@ -28,14 +29,21 @@ const Header = () => {
               {link.name}
             </NavLink>
           ) : (
-            <NavLink key={link.name} to={link.path}>
+            <NavLink key={link.name} to={link.path} className="header-cart">
               <FontAwesomeIcon className="bag-icon" icon={faBagShopping} />
+              {cartItems.length !== 0 && (
+                <span className="cart-item-count">{cartItems.length}</span>
+              )}
             </NavLink>
           )
         )}
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  cartItems: PropTypes.array,
 };
 
 export default Header;
