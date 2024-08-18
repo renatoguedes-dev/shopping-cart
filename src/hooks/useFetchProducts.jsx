@@ -11,6 +11,8 @@ function useFetchProducts() {
       .then((data) => {
         setProducts(data);
         setLoading(false);
+        console.log(data);
+        
       })
       .catch((error) => {
         console.error("Error fetching products:", error);

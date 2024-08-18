@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import homeImage from "../assets/images/woman.jpg";
+import ShopNowButton from "./ShopNowButton";
 
 const Home = () => {
   return (
@@ -16,7 +16,7 @@ const Home = () => {
           exquisite jewelry for both men and women. Step into a world of endless
           possibilities and let us redefine your shopping journey.
         </h2>
-        <Link to="products" className="shop-now">SHOP NOW</Link>
+        <ShopNowButton />
       </div>
     </>
   );

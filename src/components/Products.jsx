@@ -1,12 +1,9 @@
 import Spinner from "./Spinner";
 import StarRating from "./StarRating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCartShopping,
-  faMinus,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useOutletContext } from "react-router-dom";
+import QuantityControl from "./QuantityControl";
 
 const Products = () => {
   // load variables coming from parent container
@@ -22,20 +19,6 @@ const Products = () => {
     return cartItems.some((item) => {
       return item.quantity && item.id === product.id;
     });
-  };
-
-  // function to display the amount of items in the cart for each item in page
-  const itemQuantity = (product) => {
-    let itemAmount = 0;
-
-    cartItems.some((item) => {
-      if (item.quantity && item.id === product.id) {
-        itemAmount = item.quantity;
-        return true;
-      }
-    });
-
-    return itemAmount;
   };
 
   // function used when the Add To Cart button is pressed
@@ -68,28 +51,6 @@ const Products = () => {
     });
   };
 
-  const handleQuantityChange = (product, amount) => {
-    setCartItems((previousItems) => {
-      // first find the cart item in question so that we can remove it
-      const cartItem = previousItems.find((item) => item.id === product.id);
-      if (amount === -1 && cartItem.quantity === 1) {
-        const updatedItems = previousItems.filter(
-          (item) => item.id !== product.id
-        );
-
-        return updatedItems;
-      } else {
-        const updatedItems = previousItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + amount }
-            : item
-        );
-
-        return updatedItems;
-      }
-    });
-  };
-
   return (
     <>
       <div className="shop-header">
@@ -100,22 +61,9 @@ const Products = () => {
         </p>
       </div>
 
-      <div>
-        <h3>Cart Items:</h3>
-        {cartItems.length > 0 ? (
-          cartItems.map((item, index) => (
-            <div key={index}>
-              {item.title} - Quantity: {item.quantity}
-            </div>
-          ))
-        ) : (
-          <p>Your cart is empty</p>
-        )}
-      </div>
-
       <div className="products">
         {products.map((product) => (
-          <div key={product.id} className="product-card">
+          <div key={product.id} className="product-card card">
             <div className="product-image-div">
               <img
                 className="product-image"
@@ -125,7 +73,7 @@ const Products = () => {
             </div>
             <div className="product-details-div">
               <p className="product-title">{product.title}</p>
-              <p className="product-price">$ {product.price}</p>
+              <p className="product-price">$ {product.price.toFixed(2)}</p>
               <div className="ratings">
                 <StarRating rating={product.rating.rate} />
                 <span>({product.rating.count})</span>
@@ -133,18 +81,11 @@ const Products = () => {
             </div>
 
             {isItemInCart(product) ? (
-              <div className="quantity-control">
-                <button onClick={() => handleQuantityChange(product, -1)}>
-                  <FontAwesomeIcon
-                    icon={faMinus}
-                    className="minus-plus-icons"
-                  />
-                </button>
-                <span className="item-quantity">{itemQuantity(product)}</span>
-                <button onClick={() => handleQuantityChange(product, 1)}>
-                  <FontAwesomeIcon icon={faPlus} className="minus-plus-icons" />
-                </button>
-              </div>
+              <QuantityControl
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+                product={product}
+              />
             ) : (
               <button
                 className="add-cart-btn"
