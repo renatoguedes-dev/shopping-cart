@@ -4,6 +4,11 @@ Project: Shopping Cart
 
 This is a shopping cart application where you can browse products, add them to your cart, and manage your shopping experience. The app provides a seamless interface for viewing product details, adjusting quantities, and proceeding to checkout.
 
+<p float="left" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+  <img src="src\assets\images\projectpic1.png" alt="homepage's picture" style="width: 100%; max-width: 300px;">
+  <img src="src\assets\images\projectpic3.png" alt="cart page's picture" style="width: 100%; max-width: 300px;">
+</p>
+
 ## Technologies Used
 
 - React
@@ -12,15 +17,6 @@ This is a shopping cart application where you can browse products, add them to y
 - HTML
 - React Router
 - Fake Store API
-
-## Pictures of the Project
-
-<p float="left" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-  <img src="src\assets\images\projectpic1.png" alt="homepage's picture" style="width: 100%; max-width: 450px;">
-  <br><br>
-  <img src="src\assets\images\projectpic2.png" alt="products page's picture" style="width: 100%; max-width: 450px;">
-  <img src="src\assets\images\projectpic3.png" alt="cart page's picture" style="width: 100%; max-width: 450px;">
-</p>
 
 ## Features
 
